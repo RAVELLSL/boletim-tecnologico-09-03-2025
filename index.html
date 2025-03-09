@@ -1,0 +1,674 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Boletim Tecnológico</title>
+
+  <style>
+    body {
+      font-family: 'Roboto', sans-serif;
+      background-color: #f7f7f7;
+      color: #333;
+      margin: 0;
+      padding: 0;
+    }
+
+    header {
+      background: linear-gradient(135deg, #333, #000);
+      color: white;
+      padding: 30px 0;
+      text-align: center;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    header h1 {
+      font-size: 36px;
+      margin: 0;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+
+    .container {
+      width: 90%;
+      margin: auto;
+      padding: 20px 0;
+    }
+
+    .edition-info {
+      text-align: center;
+      font-size: 16px;
+      color: #666;
+      margin: 15px 0;
+    }
+
+    .section-title {
+      color: #333;
+      font-size: 28px;
+      margin-bottom: 20px;
+      border-bottom: 2px solid #333;
+      padding-bottom: 5px;
+      text-align: center;
+      text-transform: uppercase;
+    }
+
+    /* Configuração das seções para centralizar os cards */
+    .main-section, .innovation-section, .deu-ruim-section, .news-section {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center; /* Centraliza os cards horizontalmente */
+      gap: 20px;
+      margin: 30px 0;
+    }
+
+    .card {
+      background-color: #fff;
+      border-radius: 12px;
+      padding: 20px;
+      box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s ease;
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      width: 300px; /* Define uma largura fixa para os cards */
+    }
+
+    .card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 12px 25px rgba(0, 0, 0, 0.2);
+    }
+
+    .card img {
+      width: 100%;
+      height: 150px;
+      object-fit: cover;
+      border-radius: 10px;
+      margin-bottom: 15px;
+    }
+
+    .card h2 {
+      font-size: 18px;
+      color: #333;
+      margin-bottom: 10px;
+      text-align: center;
+    }
+
+    footer {
+      background-color: #333;
+      color: white;
+      text-align: center;
+      padding: 20px 0;
+      margin-top: 30px;
+    }
+
+    footer p {
+      margin: 0;
+      font-size: 14px;
+    }
+
+    /* Estilos para os modais */
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 100;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.7);
+    }
+
+    .modal-content {
+      background-color: #fff;
+      margin: 5% auto;
+      padding: 20px;
+      border-radius: 12px;
+      width: 60%;
+      height: 80%;
+      overflow-y: auto;
+      position: relative;
+      box-shadow: 0 8px 15px rgba(0, 0, 0, 0.5);
+    }
+
+    .modal-content h2 {
+      text-align: center;
+      color: #333;
+    }
+
+    .modal-content img {
+      width: 80%;
+      height: auto;
+      margin: 20px auto;
+      display: block;
+      border-radius: 10px;
+    }
+
+    .modal-content p {
+      font-size: 16px;
+      line-height: 1.8;
+      color: #555;
+      text-align: justify;
+      margin-top: 20px;
+    }
+
+    .close {
+      position: absolute;
+      top: 10px;
+      right: 20px;
+      color: #333;
+      font-size: 30px;
+      cursor: pointer;
+    }
+
+    /* Estilos responsivos */
+    @media (max-width: 1024px) {
+      .modal-content {
+        width: 80%;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .modal-content {
+        width: 80%;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .main-section, .innovation-section, .deu-ruim-section, .news-section {
+        flex-direction: column;
+        align-items: center; /* Centraliza os cards em telas pequenas */
+      }
+
+      .card h2 {
+        font-size: 16px;
+      }
+
+      .card img {
+        height: auto;
+        margin-bottom: 10px;
+      }
+
+      .section-title {
+        font-size: 24px;
+      }
+
+      header h1 {
+        font-size: 28px;
+      }
+
+      .modal-content {
+        width: 95%;
+        height: 90%;
+        padding: 15px;
+      }
+
+      .modal-content h2 {
+        font-size: 20px;
+      }
+
+      .modal-content p {
+        font-size: 16px;
+        text-align: left;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>Boletim Tecnológico</h1>
+  </header>
+
+  <div class="edition-info">
+    <p>Edição de 09/03/2025</p>
+  </div>
+
+  <!-- Seção: Inteligência Artificial -->
+  <h2 class="section-title">Inteligência Artificial</h2>
+  <div class="main-section">
+    <!-- Card -->
+    <div class="card" id="card1">
+      <img src="https://img.odcdn.com.br/wp-content/uploads/2024/12/ia_saude-1920x1080.jpg" 
+           alt="Dragon Copilot: Microsoft revela assistente de IA de voz para médicos">
+      <h2>Dragon Copilot:<br>Microsoft revela assistente de IA de voz para médicos</h2>
+    </div>
+
+    <div class="card" id="card2">
+      <img src="https://img.odcdn.com.br/wp-content/uploads/2024/07/IA-e-criatividade-1920x1080.jpg" 
+           alt="IA produz conteúdo original? E os direitos autorais? Especialistas opinam">
+      <h2>IA produz conteúdo original?<br>E os direitos autorais?<br>Especialistas opinam</h2>
+    </div>
+
+    <div class="card" id="card3">
+      <img src="https://img.odcdn.com.br/wp-content/uploads/2025/03/Destaque-Quadro-feito-com-IA-Leilao-1920x1080.jpg" 
+           alt="Quadro feito com IA é leiloado por mais de R$ 1 milhão">
+      <h2>Quadro feito com IA é leiloado por mais de R$ 1 milhão</h2>
+    </div>
+  </div>
+
+
+
+  <!-- Seção: Inovação Tecnológica -->
+  <h2 class="section-title">Inovação Tecnológica</h2>
+  <div class="innovation-section">
+    <!-- Card  -->
+    <div class="card" id="card4">
+        <img src="https://t.ctcdn.com.br/a3Sgwf3m3O8urZLBWNDiw0yKmI8=/1024x576/smart/i987345.jpeg" 
+             alt="Cientistas criam o 1º computador com neurônios humanos">
+        <h2>Cientistas criam o 1º computador com neurônios humanos</h2>
+      </div>
+
+      <div class="card" id="card5">
+        <img src="https://img.odcdn.com.br/wp-content/uploads/2024/11/shutterstock_2515867473-e1733748700252-1920x1080.jpg" 
+             alt="Gemini: você poderá conversar em chamada de vídeo com a IA">
+        <h2>Gemini:<br>você poderá conversar em chamada de vídeo com a IA</h2>
+      </div>
+
+      <div class="card" id="card6">
+        <img src="https://img.odcdn.com.br/wp-content/uploads/2025/01/tsmc-processador-1920x1080.jpg" 
+             alt="União improvável? Taiwanesa TSMC deve investir US$ 100 bilhões em fábricas de chips nos EUA">
+        <h2>União improvável?<br>Taiwanesa TSMC deve investir US$ 100 bilhões em fábricas de chips nos EUA</h2>
+      </div>            
+  </div>
+
+
+
+  <!-- Seção: Deu Ruim -->
+  <h2 class="section-title">Deu Ruim!?</h2>
+  <div class="deu-ruim-section">
+    <!-- Card  -->    
+      <div class="card" id="card7">
+        <img src="https://img.odcdn.com.br/wp-content/uploads/2025/03/dublagem-por-ia-1920x1080.jpg" 
+             alt="Dublagem mal feita com IA vira alvo de críticas na internet">
+        <h2>Dublagem mal feita com IA vira alvo de críticas na internet</h2>
+      </div>
+
+      <div class="card" id="card8">
+        <img src="https://img.odcdn.com.br/wp-content/uploads/2025/03/palantir-1920x1080.jpg" 
+             alt="Palantir lança sistemas de IA para o exército dos EUA">
+        <h2>Palantir lança sistemas de IA para o exército dos EUA</h2>
+      </div>               
+  </div>
+
+
+
+  <!-- Seção: Notícias Variadas -->
+  <h2 class="section-title">Notícias Variadas</h2>
+  <div class="news-section">
+    <!-- Card  -->
+    <div class="card" id="card9">
+        <img src="https://static.mundoeducacao.uol.com.br/mundoeducacao/conteudo_legenda/da98a89843e32b717357db4ab9a66c00.jpg" 
+             alt="5G vai dominar redes móveis em 4 anos e alcançar 8,4 bilhões de conexões">
+        <h2>5G vai dominar redes móveis em 4 anos e alcançar 8,4 bilhões de conexões</h2>
+      </div>
+
+      <div class="card" id="card10">
+        <img src="https://img.odcdn.com.br/wp-content/uploads/2025/03/Browser-Operator-Idle-screen-1920x1080.jpg" 
+             alt="Opera apresenta recurso de navegador que utiliza IA agêntica para executar tarefas">
+        <h2>Opera apresenta recurso de navegador que utiliza IA agêntica para executar tarefas</h2>
+      </div>
+
+      <div class="card" id="card11">
+        <img src="https://img.odcdn.com.br/wp-content/uploads/2025/02/cavalo-1920x1080.jpg" 
+             alt="Nova IA pode ‘traduzir’ emoções de animais">
+        <h2>Nova IA pode ‘traduzir’ emoções de animais</h2>
+      </div>
+
+      <div class="card" id="card12">
+        <img src="https://tm.ibxk.com.br/2025/02/28/28111435105275.jpg?ims=1280x480" 
+             alt="Starlink pode 'roubar' contrato com governo dos EUA para controle de tráfego aéreo">
+        <h2>Starlink pode 'roubar' contrato com governo dos EUA para controle de tráfego aéreo</h2>
+      </div>
+
+                    
+      </div>
+  </div>
+
+  <!-- ========================== 
+       MÓDULOS (MODAIS) 
+       ========================== -->
+
+<!-- Modal 1 -->
+<div id="modal1" class="modal">
+  <div class="modal-content">
+      <span class="close" onclick="closeModal('modal1')">&times;</span>
+      <h2>Microsoft Apresenta Dragon Copilot: Assistente de IA para Médicos</h2>
+      <img src="https://img.odcdn.com.br/wp-content/uploads/2024/12/ia_saude-1920x1080.jpg" alt="Imagem representativa da matéria">
+      <p>A Microsoft anunciou o Dragon Copilot, um novo assistente de inteligência artificial voltado para o setor de saúde. A ferramenta utiliza tecnologia de voz para ajudar médicos a redigir encaminhamentos, resumir consultas e responder perguntas com base no que foi discutido durante o atendimento.</p>
+      
+      <h3>O que é o Dragon Copilot?</h3>
+      <p>O Dragon Copilot combina funcionalidades de duas ferramentas já existentes:</p>
+      <ul>
+          <li><strong>Dragon Medical One</strong> – tecnologia de ditado por voz.</li>
+          <li><strong>DAX Copilot</strong> – escuta ativa para transcrição e análise de consultas médicas.</li>
+      </ul>
+      <p>Com essa fusão, o novo assistente pretende reduzir o tempo gasto em tarefas administrativas, permitindo que médicos se concentrem mais no atendimento aos pacientes. Um estudo do Google Cloud revelou que profissionais da saúde dedicam cerca de 28 horas semanais a burocracias, e a Microsoft busca diminuir esse número com IA.</p>
+
+      <h3>Como funciona o Dragon Copilot?</h3>
+      <ul>
+          <li>Disponível para dispositivos móveis, navegador e desktop.</li>
+          <li>Integração com registros eletrônicos de saúde.</li>
+          <li>Capacidade de responder perguntas baseadas no que foi ouvido na consulta, como “O paciente relatou dor de cabeça?”.</li>
+          <li>Sugestões de tratamento com base nos dados coletados.</li>
+      </ul>
+
+      <h3>Disponibilidade e Preço</h3>
+      <p>O Dragon Copilot será lançado em maio nos Estados Unidos e Canadá. Em seguida, chegará à Holanda, França, Alemanha e Reino Unido. A Microsoft não revelou os valores do serviço, mas afirmou que os preços serão “competitivos”.</p>
+
+      <p>Esse lançamento reforça a aposta da empresa em inteligência artificial aplicada à saúde, após a compra da Nuance Communications, criadora das tecnologias utilizadas, por US$ 16 bilhões em 2021.</p>
+  </div>
+</div>
+
+<!-- Modal 2 -->
+<div id="modal2" class="modal">
+  <div class="modal-content">
+      <span class="close" onclick="closeModal('modal2')">&times;</span>
+      <h2>IA e Direitos Autorais: A Produção de Conteúdo é Realmente Original?</h2>
+      <img src="https://img.odcdn.com.br/wp-content/uploads/2024/07/IA-e-criatividade-1920x1080.jpg" alt="Imagem representativa da matéria">
+      <p>A ascensão da inteligência artificial na criação de conteúdo tem levantado questões sobre originalidade e direitos autorais. Durante o evento Spotlight, promovido pelo Olhar Digital, especialistas discutiram o impacto da IA no jornalismo e na produção de conteúdo digital.</p>
+
+      <h3>A IA pode substituir a criatividade humana?</h3>
+      <p>Os especialistas concordam que a IA não é uma ameaça direta aos criadores, mas sim uma ferramenta de apoio. Rafaela Lotto, da YOUPIX, destaca que o público se conecta com conteúdo autêntico e humanizado, algo que a IA ainda não consegue replicar totalmente.</p>
+
+      <p>Já Flávio Moreira, do InfoMoney, aponta que a IA pode aumentar o alcance da informação, mas alerta para a qualidade do conteúdo gerado automaticamente. Ele destaca que, em regiões onde a informação é escassa, qualquer conteúdo pode ser útil, mas nos grandes centros, a qualidade se torna um diferencial.</p>
+
+      <p>Pyr Marcondes, do Pipeline Group, acredita que a IA pode criar uma “terceira via” da criatividade, funcionando como uma parceira do ser humano. Ele relata que utiliza IA para sugerir temas e estruturar textos, mas sempre intervém para dar um toque pessoal ao material final.</p>
+
+      <h3>IA e direitos autorais: um problema sem solução?</h3>
+      <p>Uma das maiores polêmicas envolve a autoria do conteúdo produzido por IA. Se a tecnologia se baseia em textos e materiais existentes, até que ponto ela realmente cria algo novo?</p>
+
+      <p>Rafaela Lotto e Flávio Moreira destacam que a regulamentação dos direitos autorais ainda é falha. No jornalismo, por exemplo, não há uma definição clara sobre a “propriedade” de uma notícia. Já Pyr Marcondes acredita que, com o crescimento do volume de conteúdos gerados, será cada vez mais difícil identificar a originalidade de uma produção.</p>
+
+      <p>A discussão sobre IA e direitos autorais está longe de uma conclusão, mas o consenso é que a tecnologia não substituirá a criatividade humana, e sim servirá como um complemento para ampliar a produção e distribuição de conteúdo.</p>
+  </div>
+</div>
+
+<!-- Modal 3 -->
+<div id="modal3" class="modal">
+  <div class="modal-content">
+      <span class="close" onclick="closeModal('modal3')">&times;</span>
+      <h2>Quadro Criado com IA é Leiloado por Mais de R$ 1 Milhão</h2>
+      <img src="https://img.odcdn.com.br/wp-content/uploads/2025/03/Destaque-Quadro-feito-com-IA-Leilao-1920x1080.jpg" alt="Imagem representativa da matéria">
+      <p>A obra “Machine Hallucinations – ISS Dreams – A”, do artista Refik Anadol, foi arrematada por US$ 227,2 mil (aproximadamente R$ 1,3 milhão) em um leilão online da Christie’s, encerrado no dia 5 de março. O evento foi o primeiro da casa de leilões dedicado exclusivamente a obras criadas com inteligência artificial (IA).</p>
+
+      <h3>O Leilão e a Polêmica</h3>
+      <p>O leilão arrecadou um total de US$ 729 mil (cerca de R$ 4,2 milhões), superando a expectativa inicial de US$ 600 mil. No entanto, nem todas as obras tiveram o mesmo sucesso: 14 dos 34 lotes não receberam lances suficientes ou foram vendidos abaixo do esperado.</p>
+
+      <p>Apesar do êxito financeiro, o evento gerou controvérsias. Uma carta aberta assinada por quase 6.500 pessoas pediu o cancelamento do leilão, alegando que muitas das obras foram criadas com modelos de IA treinados em imagens protegidas por direitos autorais, sem a devida permissão dos artistas originais.</p>
+
+      <p>A Christie’s se defendeu afirmando que os artistas envolvidos possuem carreiras estabelecidas e que a IA foi utilizada como uma ferramenta para expandir suas expressões criativas.</p>
+
+      <h3>IA na Arte: Tendência ou Desafio?</h3>
+      <p>O leilão reforça o crescente debate sobre o impacto da inteligência artificial no mundo da arte. Enquanto alguns enxergam novas possibilidades criativas, outros veem problemas éticos e de direitos autorais. O mercado, no entanto, parece disposto a pagar alto por essa nova forma de expressão.</p>
+  </div>
+</div>
+
+<!-- Modal 4 -->
+<div id="modal4" class="modal">
+  <div class="modal-content">
+      <span class="close" onclick="closeModal('modal4')">&times;</span>
+      <h2>Cientistas Criam Primeiro Computador com Neurônios Humanos</h2>
+      <img src="https://t.ctcdn.com.br/a3Sgwf3m3O8urZLBWNDiw0yKmI8=/1024x576/smart/i987345.jpeg" alt="Imagem representativa da matéria">
+      <p>A empresa australiana Cortical Labs anunciou o CL1, o primeiro computador que utiliza neurônios humanos cultivados em laboratório. Diferente dos computadores tradicionais, que operam com circuitos de silício, o CL1 adota uma abordagem bio-híbrida, combinando células cerebrais com hardware especializado para criar uma inteligência artificial biológica.</p>
+
+      <h3>Como Funciona o CL1?</h3>
+      <p>O sistema opera com três pilares principais:</p>
+      <ul>
+          <li><strong>Hardware bio-híbrido:</strong> Biochips equipados com microeletrodos monitoram e estimulam a atividade neural.</li>
+          <li><strong>Sistema de suporte vital:</strong> Mantém os neurônios ativos por até seis meses, regulando temperatura e nutrientes.</li>
+          <li><strong>Software biOS:</strong> Cria um ambiente digital onde os neurônios podem aprender e se reorganizar, imitando o cérebro humano.</li>
+      </ul>
+
+      <h3>Vantagens da Computação Biológica</h3>
+      <p>Os neurônios humanos têm capacidade natural de aprendizado e auto-organização, permitindo maior eficiência no processamento de dados. Enquanto supercomputadores convencionais exigem grandes quantidades de energia, o CL1 consome apenas 850-1000W para operar um rack com 40 unidades, reduzindo o impacto ambiental.</p>
+
+      <p>Além disso, o biocomputador pode ser usado para pesquisas neurológicas, desenvolvimento de medicamentos e medicina personalizada, criando avatares neurais específicos para pacientes.</p>
+
+      <h3>O Futuro da Computação Biológica</h3>
+      <p>A Cortical Labs já investiu mais de US$ 25 milhões no projeto e planeja lançar a Cortical Cloud, um sistema remoto que permitirá a pesquisadores acessarem o biocomputador para experimentos. A empresa também desenvolve um modelo chamado Cérebro Mínimo Viável, que busca equilibrar eficiência e complexidade para aprimorar a integração entre biologia e tecnologia.</p>
+
+      <p>O CL1 marca uma nova era da computação, onde biologia e tecnologia se fundem para redefinir os limites do que é possível.</p>
+  </div>
+</div>
+
+<!-- Modal 5 -->
+<div id="modal5" class="modal">
+  <div class="modal-content">
+      <span class="close" onclick="closeModal('modal5')">&times;</span>
+      <h2>Gemini Permitirá Chamadas de Vídeo e Compartilhamento de Tela</h2>
+      <img src="https://img.odcdn.com.br/wp-content/uploads/2024/11/shutterstock_2515867473-e1733748700252-1920x1080.jpg" alt="Imagem representativa da matéria">
+      <p>O Google anunciou uma nova funcionalidade para o Gemini Live, sua ferramenta de IA para conversação contínua. Em breve, os usuários poderão realizar chamadas de vídeo e compartilhar a tela com o assistente, permitindo uma interação mais dinâmica e contextual. A novidade foi apresentada durante o Mobile World Congress (MWC), em Barcelona.</p>
+
+      <h3>Como Funcionará?</h3>
+      <p>Desde seu lançamento, o Gemini Live já possuía a capacidade de "ver" o ambiente por meio da câmera do celular. Com as novas funções, será possível mostrar objetos e cenários para a IA em tempo real e receber sugestões baseadas no que é exibido.</p>
+
+      <p>Um exemplo apresentado na demonstração foi de um ceramista perguntando à IA quais esmaltes combinam melhor com um vaso recém-queimado, e o Gemini sugeriu opções com base no que estava vendo.</p>
+
+      <h3>Concorrência com o ChatGPT</h3>
+      <p>O Google busca fortalecer o Gemini como alternativa ao ChatGPT Voice Mode, da OpenAI, que também permite interações por voz. Além disso, a novidade chega pouco depois do lançamento do Gemini 2.0 Pro e do modelo experimental Gemini 2.0 Flash Thinking, voltado para raciocínio avançado.</p>
+
+      <h3>Disponibilidade</h3>
+      <p>A atualização do Gemini Live será lançada para dispositivos Android no final de março, mas, inicialmente, apenas assinantes do Gemini Advanced terão acesso. O Google ainda não revelou a data exata do lançamento.</p>
+  </div>
+</div>
+
+<!-- Modal 6 -->
+<div id="modal6" class="modal">
+  <div class="modal-content">
+      <span class="close" onclick="closeModal('modal6')">&times;</span>
+      <h2>TSMC Deve Investir US$ 100 Bilhões em Fábricas de Chips nos EUA</h2>
+      <img src="https://img.odcdn.com.br/wp-content/uploads/2025/01/tsmc-processador-1920x1080.jpg" alt="Imagem representativa da matéria">
+      <p>A TSMC, gigante taiwanesa de semicondutores, planeja investir US$ 100 bilhões (mais de R$ 580 bilhões) na construção de fábricas de chips nos Estados Unidos nos próximos quatro anos. O anúncio oficial deve ser feito pelo presidente Donald Trump ainda nesta segunda-feira (3).</p>
+
+      <h3>Reestruturação da Indústria de Chips nos EUA</h3>
+      <p>O investimento faz parte dos esforços dos Estados Unidos para fortalecer sua produção doméstica de semicondutores, reduzindo a dependência de fabricantes estrangeiros. A medida ocorre em meio a restrições à exportação de tecnologia, especialmente para países asiáticos.</p>
+
+      <p>A TSMC já opera fábricas no Arizona, mas a maior parte de sua produção avançada permanece em Taiwan. Desde o governo Joe Biden, Washington pressiona a empresa a expandir sua capacidade nos EUA, garantindo o fornecimento de chips para inteligência artificial, defesa e outras tecnologias estratégicas.</p>
+
+      <h3>Parceria com os EUA</h3>
+      <p>A TSMC já recebeu US$ 6,6 bilhões em subsídios do governo americano por meio do Chips Act, que incentiva a produção nacional de semicondutores. Em comunicado, a empresa reforçou seu compromisso com a inovação e crescimento do setor em parceria com os EUA.</p>
+
+      <h3>Chips: Interesse Estratégico</h3>
+      <p>A busca por maior independência na fabricação de semicondutores se intensificou após a escassez global de chips durante a pandemia de Covid-19. Além disso, Trump defende a produção nacional para reduzir importações e fortalecer a segurança tecnológica e militar do país.</p>
+
+      <p>Com essa iniciativa, os Estados Unidos esperam consolidar sua posição no setor de chips e reduzir a influência da Ásia na cadeia de suprimentos global.</p>
+  </div>
+</div>
+
+<!-- Modal 7 -->
+<div id="modal7" class="modal">
+  <div class="modal-content">
+      <span class="close" onclick="closeModal('modal7')">&times;</span>
+      <h2>Dublagem Feita por IA no Prime Video Gera Críticas na Internet</h2>
+      <img src="https://img.odcdn.com.br/wp-content/uploads/2025/03/dublagem-por-ia-1920x1080.jpg" alt="Imagem representativa da matéria">
+      <p>A dublagem do filme “O Silêncio de Marcos Tremmer”, recém-adicionado ao catálogo do Amazon Prime Video, viralizou nas redes sociais — mas não pelos melhores motivos. O longa, de origem uruguaia, recebeu uma dublagem automatizada de baixa qualidade, levantando críticas sobre o uso de inteligência artificial (IA) na dublagem.</p>
+
+      <h3>Erros e Falta de Emoção na Dublagem</h3>
+      <p>Usuários apontaram falta de entonação, erros grotescos na pronúncia e até mesmo a leitura literal de palavras mal digitadas, como um “ó-que-quê” em vez de um simples “ok”. Além disso, versões em diferentes idiomas apresentam os mesmos problemas, sugerindo um processo automatizado e não revisado.</p>
+
+      <h3>Amazon e Distribuidora em Silêncio</h3>
+      <p>Até o momento, a Prime Video não se manifestou sobre o caso, nem confirmou oficialmente o uso de IA na dublagem. Especula-se que a distribuidora Batata Films pode ter optado pelo método para reduzir custos, mas a plataforma também enfrenta críticas por disponibilizar o conteúdo sem um controle de qualidade adequado.</p>
+
+      <h3>IA na Dublagem: Futuro ou Problema?</h3>
+      <p>A polêmica reacende o debate sobre o uso da inteligência artificial na indústria audiovisual. Enquanto a tecnologia promete avanços, casos como esse mostram que ainda há desafios na entrega de uma experiência convincente ao público. Para quem prefere evitar problemas na dublagem, o filme segue disponível no idioma original com legendas.</p>
+  </div>
+</div>
+
+<!-- Modal 8 -->
+<div id="modal8" class="modal">
+  <div class="modal-content">
+      <span class="close" onclick="closeModal('modal8')">&times;</span>
+      <h2>Palantir Lança Sistemas de IA para o Exército dos EUA</h2>
+      <img src="https://img.odcdn.com.br/wp-content/uploads/2025/03/palantir-1920x1080.jpg" alt="Imagem representativa da matéria">
+      <p>A Palantir anunciou o lançamento dos seus primeiros sistemas militares baseados em inteligência artificial (IA) para o Exército dos Estados Unidos. Chamados de Tactical Intelligence Targeting Access Node (TITAN), esses sistemas foram projetados para coletar dados de sensores espaciais e aprimorar a precisão e eficácia estratégica no campo de batalha.</p>
+
+      <h3>Contrato Bilionário e Expansão Militar</h3>
+      <p>A empresa garantiu um contrato de US$ 178 milhões, consolidando-se como fornecedora principal de um grande programa de defesa. O TITAN se destaca por operar diretamente em veículos militares, permitindo que os soldados tomem decisões de inteligência sem depender da nuvem.</p>
+
+      <p>A Palantir se uniu a empresas como Northrop Grumman, L3Harris e Anduril Industries para aprimorar os sistemas, acompanhando a crescente demanda por tecnologias baseadas em IA no setor militar.</p>
+
+      <h3>IA no Campo de Batalha</h3>
+      <p>O contrato reflete a expansão da IA na estratégia de defesa dos EUA, à medida que o país busca avançar tecnologicamente frente à concorrência global. Apesar da volatilidade no mercado, o segmento de defesa da Palantir cresceu 45% no último trimestre, com um aumento impressionante de 340% no valor da empresa no último ano.</p>
+
+      <p>O CEO Alex Karp defende maior investimento em tecnologia militar, reforçando a importância da inovação para manter a competitividade dos EUA diante de potências emergentes no setor. A Palantir segue colaborando com o Exército para entregar os novos sistemas dentro do prazo e orçamento estipulados.</p>
+  </div>
+</div>
+
+<!-- Modal 9 -->
+<div id="modal9" class="modal">
+  <div class="modal-content">
+      <span class="close" onclick="closeModal('modal9')">&times;</span>
+      <h2>5G Deve Dominar Redes Móveis em Quatro Anos, com 8,4 Bilhões de Conexões</h2>
+      <img src="https://static.mundoeducacao.uol.com.br/mundoeducacao/conteudo_legenda/da98a89843e32b717357db4ab9a66c00.jpg" alt="Imagem representativa da matéria">
+      <p>Um relatório da 5G Americas e da Omdia projeta que, até 2029, o 5G será responsável por 59% das conexões móveis globais, atingindo 8,4 bilhões de usuários. O crescimento acelerado deve fazer com que a tecnologia supere o 4G em breve.</p>
+
+      <p>Desde o terceiro trimestre de 2024, o 5G já ultrapassou 2 bilhões de conexões, com um aumento de 170 milhões de novos usuários no período, representando um crescimento de 48% em relação ao ano anterior.</p>
+
+      <h3>Crescimento do 5G nas Américas</h3>
+      <ul>
+          <li><strong>América Latina:</strong> O número de conexões atingiu 67 milhões em 2024, com Brasil, Chile, Porto Rico e Uruguai liderando a adoção. No entanto, o 4G ainda domina, representando 74% das conexões móveis. O alto custo de aparelhos compatíveis segue como um obstáculo.</li>
+          <li><strong>América do Norte:</strong> A região alcançou 264 milhões de conexões 5G, um aumento de 22 milhões no último ano. A tecnologia já representa 37% das conexões móveis e deve superar o 4G em 2025.</li>
+      </ul>
+
+      <p>Atualmente, há 341 redes comerciais de 5G operando no mundo, sendo 14% na América Latina e 5% na América do Norte. Com a evolução para o 5G Avançado, a tecnologia promete aumentar ainda mais sua presença e transformar diversos setores da economia global.</p>
+  </div>
+</div>
+
+<!-- Modal 10 -->
+<div id="modal10" class="modal">
+  <div class="modal-content">
+      <span class="close" onclick="closeModal('modal10')">&times;</span>
+      <h2>Opera Lança IA que Navega e Executa Tarefas de Forma Autônoma</h2>
+      <img src="https://img.odcdn.com.br/wp-content/uploads/2025/03/Browser-Operator-Idle-screen-1920x1080.jpg" alt="Imagem representativa da matéria">
+      <p>A Opera anunciou o Browser Operator, um agente de inteligência artificial (IA) integrado ao navegador, capaz de realizar tarefas de navegação de forma autônoma. A novidade promete transformar a experiência online, tornando o navegador mais interativo e útil no dia a dia.</p>
+
+      <h3>Como Funciona o Browser Operator?</h3>
+      <ul>
+          <li>Permite que o usuário dê comandos em linguagem natural, como "compre um pacote de 10 pares de meias brancas da Nike, tamanho 12", e o agente executa a tarefa.</li>
+          <li>Atua de forma automatizada, sem necessidade de cliques manuais.</li>
+          <li>O usuário pode acompanhar todo o processo, intervir ou cancelar a ação a qualquer momento.</li>
+          <li><strong>Segurança reforçada:</strong> a IA roda localmente, sem depender de servidores externos ou capturas de tela, garantindo mais privacidade.</li>
+      </ul>
+
+      <h3>Diferencial do Opera</h3>
+      <p>Enquanto outras soluções de IA ainda estão em testes, a Opera já implementa essa funcionalidade de forma nativa no navegador. O processamento ocorre diretamente no dispositivo do usuário, tornando a navegação mais ágil e segura.</p>
+
+      <h3>Disponibilidade</h3>
+      <p>Atualmente, o Browser Operator está em fase de testes, mas será integrado nos próximos meses ao programa de recursos de IA da Opera. A ferramenta marca um passo importante na evolução dos navegadores, tornando-os assistentes digitais ativos, e não apenas portais de acesso à web.</p>
+  </div>
+</div>
+
+<!-- Modal 11 -->
+<div id="modal11" class="modal">
+  <div class="modal-content">
+      <span class="close" onclick="closeModal('modal11')">&times;</span>
+      <h2>Nova IA Consegue "Traduzir" Emoções de Animais com Alta Precisão</h2>
+      <img src="https://img.odcdn.com.br/wp-content/uploads/2025/02/cavalo-1920x1080.jpg" alt="Imagem representativa da matéria">
+      <p>Pesquisadores da Universidade de Copenhague, na Dinamarca, desenvolveram um modelo de inteligência artificial (IA) capaz de identificar emoções em animais com 89,49% de precisão. O estudo analisou padrões vocais de sete espécies de mamíferos herbívoros, incluindo vacas, cavalos, porcos e cabras.</p>
+
+      <h3>Como Funciona a IA?</h3>
+      <p>A tecnologia analisa duração, frequência, distribuição de energia e modulação dos sons emitidos pelos animais. A partir disso, os pesquisadores classificaram as vocalizações em dois estados emocionais principais:</p>
+      <ul>
+          <li><strong>Positivo:</strong> expressões de bem-estar, tranquilidade ou satisfação.</li>
+          <li><strong>Negativo:</strong> sinais de estresse, dor ou medo.</li>
+      </ul>
+
+      <p>Os cientistas notaram que esses padrões são consistentes entre diferentes espécies, sugerindo que a expressão das emoções foi preservada ao longo da evolução animal.</p>
+
+      <h3>Aplicações e Impacto</h3>
+      <p>O estudo abre portas para o desenvolvimento de ferramentas de monitoramento de emoções em tempo real, auxiliando no bem-estar animal e em áreas como:</p>
+      <ul>
+          <li>Cuidados veterinários mais eficientes.</li>
+          <li>Conservação de espécies ameaçadas.</li>
+          <li>Melhoria da produtividade em fazendas e criações.</li>
+      </ul>
+
+      <p>Além disso, os pesquisadores tornaram os dados públicos para acelerar pesquisas futuras sobre como a IA pode aprimorar a comunicação entre humanos e animais.</p>
+  </div>
+</div>
+
+<!-- Modal 12 -->
+<div id="modal12" class="modal">
+  <div class="modal-content">
+      <span class="close" onclick="closeModal('modal12')">&times;</span>
+      <h2>Starlink Pode Assumir Contrato Bilionário para Controle de Tráfego Aéreo nos EUA</h2>
+      <img src="https://tm.ibxk.com.br/2025/02/28/28111435105275.jpg?ims=1280x480" alt="Imagem representativa da matéria">
+      <p>A Starlink, empresa de internet via satélite de Elon Musk, pode garantir um contrato de US$ 2,4 bilhões (cerca de R$ 14 bilhões) com a Administração Federal de Aviação dos EUA (FAA). Segundo o The Washington Post, o órgão estaria próximo de cancelar seu atual contrato com a Verizon e transferir a responsabilidade para a Starlink.</p>
+
+      <h3>Mudança no Controle de Tráfego Aéreo</h3>
+      <p>O contrato envolve uma atualização no sistema de comunicação das torres de controle e escritórios da FAA. Musk já criticou publicamente a Verizon, afirmando que seu sistema "não está funcionando" e representa "riscos graves para os viajantes". Além disso, equipamentos da Starlink já foram instalados em algumas unidades da FAA, sugerindo que a transição pode estar em andamento.</p>
+
+      <h3>Controvérsias e Conflito de Interesses</h3>
+      <p>A possível mudança gerou questionamentos sobre um possível favorecimento a Musk, que tem laços próximos com o governo Trump. O bilionário também atua no Departamento de Eficiência do Governo dos EUA (DOGE), uma divisão que busca reduzir custos em órgãos públicos. Críticos apontam que essa influência pode estar beneficiando suas empresas em contratos governamentais.</p>
+
+      <h3>O Papel da Starlink</h3>
+      <p>A Starlink já é uma das principais provedoras de internet via satélite no mundo, oferecendo conexão estável para áreas remotas e regiões sem cobertura tradicional. No Brasil, a empresa lidera o setor e é amplamente utilizada na Amazônia e em reservas indígenas.</p>
+
+      <p>Caso a Starlink assuma o contrato da FAA, isso representaria um passo importante na integração de sua tecnologia com sistemas críticos de infraestrutura nos Estados Unidos.</p>
+  </div>
+</div>
+
+
+
+
+  <!-- Rodapé -->
+  <footer>
+    <p>&copy; 2024 - 2025</p>
+  </footer>
+
+  <!-- Scripts para Modais -->
+  <script>
+    // Seleciona todos os cartões, modais e botões de fechamento
+    const cards = document.querySelectorAll('.card');
+    const modals = document.querySelectorAll('.modal');
+    const closes = document.querySelectorAll('.close');
+
+    // Verifica se a quantidade de cartões e modais corresponde
+    if (cards.length !== modals.length) {
+      console.warn("O número de cartões não corresponde ao número de modais. Verifique seu HTML.");
+    }
+
+    // Adiciona evento de clique aos cartões para abrir o modal correspondente
+    cards.forEach((card, index) => {
+      card.addEventListener('click', () => {
+        if (modals[index]) {
+          modals[index].style.display = 'block'; // Exibe o modal correspondente
+        } else {
+          console.error(`Nenhum modal encontrado para o card com índice ${index}. Verifique o HTML.`);
+        }
+      });
+    });
+
+    // Adiciona evento de clique aos botões de fechamento para fechar o modal correspondente
+    closes.forEach((close, index) => {
+      close.addEventListener('click', () => {
+        if (modals[index]) {
+          modals[index].style.display = 'none'; // Esconde o modal correspondente
+        } else {
+          console.error(`Nenhum modal encontrado para o botão de fechamento com índice ${index}. Verifique o HTML.`);
+        }
+      });
+    });
+
+    // Adiciona funcionalidade para fechar o modal ao clicar fora dele
+    window.onclick = function (event) {
+      modals.forEach((modal) => {
+        if (event.target === modal) {
+          modal.style.display = 'none'; // Esconde o modal se o clique for fora do conteúdo
+        }
+      });
+    };
+
+    // Adiciona acessibilidade: fecha o modal ao pressionar a tecla ESC
+    window.addEventListener('keydown', function (event) {
+      if (event.key === 'Escape') { // Detecta a tecla ESC
+        modals.forEach((modal) => {
+          modal.style.display = 'none'; // Esconde todos os modais abertos
+        });
+      }
+    });
+  </script>
+</body>
+</html>
